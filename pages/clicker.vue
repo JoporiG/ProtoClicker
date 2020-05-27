@@ -12,7 +12,7 @@
       <v-list-item>
         <v-container class="center" style="height: 500px">
               <v-btn @click="increasing" class="but" fab large>
-                  <v-icon dark justify-center>.!.</v-icon>
+                <v-img src="https://euro-pack.ru/wp-content/uploads/2020/03/pelm_im1_15.png"/>
               </v-btn>
         </v-container>
       </v-list-item>
@@ -41,12 +41,13 @@ export default {
   },
   methods:{
     increasing(){
-      this.coins++;
+      this.coins += this.coinsPerClick;
+      this.$store.dispatch('ChangeCoins', this.coinsPerClick);
     }
   },
-  mounted(){
-    this.coins = 0;
-    //здесь надо коины искать. либо с сервера брать, либо в вуех класть.
+  mounted(){ //ебаная хуйня не работает
+    this.coins = this.$store.getters.GetCoins;
+    this.coinsPerClick = this.$store.getters.GetOnClick;
   }
 }
 </script>
