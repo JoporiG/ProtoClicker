@@ -1,54 +1,36 @@
 <template>
   <v-app>
     <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
-                <v-toolbar-title>Login form</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field
-                    label="Login"
-                    name="login"
-                    prepend-icon="mdi-account"
-                    type="text"
-                    v-model="login"
-                  ></v-text-field>
-
-                  <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                    v-model="password"
-                  ></v-text-field>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" @click="login()">Login</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
+      <v-container fluid>
+          <v-card width="550" class="mx-auto my-10">
+            <v-card-title class="py-6">
+              <h1>Вход</h1>
+            </v-card-title>
+            <v-card-text>
+              <v-form class="px-3 py-3">
+                <v-text-field 
+                  label="Логин" 
+                  prepend-icon="mdi-account-circle"
+                  type="text"
+                  v-model="login"
+                />
+                <v-text-field 
+                  :type="showPassword ? 'text' : 'password'" 
+                  label="Пароль"
+                  v-model="password"
+                  prepend-icon="mdi-lock"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="showPassword = !showPassword"
+                />
+              </v-form>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions class="px-3 py-3">
+              <v-btn color="success" @click="signup()">Создать аккаунт</v-btn>
+              <v-spacer></v-spacer>
+              <v-btn color="info" @click="signin()">Войти</v-btn>
+            </v-card-actions>
+          </v-card>
       </v-container>
     </v-content>
   </v-app>
@@ -56,19 +38,25 @@
 
 <script>
 export default {
+    components: {
+    },
     data(){
-        return{
-            Login: '',
-            password: '',
-        }
+      return{
+          login: '',
+          password: '',
+          showPassword: false,
+      }
     },
     methods:{
-        login(){
-            //Паша, работай
+        signin(){
+            //Паша, работай (нахуй иди)
             //тут еще с сервера надо коины получать и в клик (короче все о пользователе)
             if(true){ //Тут условие, что ник и пароль подходят
                 this.$router.push('/clicker')
             }
+        },
+        signup() {
+          this.$router.push('/signup')
         }
     }
 }
